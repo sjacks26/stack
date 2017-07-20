@@ -202,6 +202,7 @@ class fileOutListener(StreamListener):
         message['limit']['time'] = time.strftime('%Y-%m-%dT%H:%M:%S')
 
         time_str = time.strftime(self.tweetsOutFileDateFrmt)
+        # I (Sam) think the next line is where we need to add the process name. I don't know what the process name is, though.
         JSON_file_name = self.tweetsOutFilePath + time_str + '-' + self.collector['collector_name'] + '-streamlimits-' + self.project_id + '-' + self.collector_id + '-' + self.tweetsOutFile
         if not os.path.isfile(JSON_file_name):
             self.logger.info('Creating new stream limit file: %s' % JSON_file_name)
@@ -211,6 +212,7 @@ class fileOutListener(StreamListener):
             stream_limit_file.write('\n')
 
         # Total tally for the collector in Mongo
+        # This writes to the config collection inside the main project DB in Mongo.
         self.limit_count += int(message['limit'].get('track'))
         self.project_config_db.update({'_id': ObjectId(self.collector_id)}, {
             '$set': {'stream_limit_loss.total': self.limit_count}
