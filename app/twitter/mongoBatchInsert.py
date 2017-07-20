@@ -233,8 +233,10 @@ def go(project_id, rawdir, insertdir, logdir):
                         line = line.strip()
                         notice = simplejson.loads(line)
                         stream_limits_list.append(notice)
-
+                        
                         stream_limit_collection = data_db.limits
+                        # This looks like where I (Sam) want to insert the collector name for 
+                        # it to appear in each doc in the limits collection in the main project db.
                         inserted_ids_list = insert_tweet_list(stream_limit_collection, stream_limits_list, line_number, processedTweetsFile, data_db)
                         stream_limits_list = []
 
