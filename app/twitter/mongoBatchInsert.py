@@ -21,7 +21,6 @@ import logging.config
 import time
 import glob
 import simplejson
-from pymongo import Connection
 from email.utils import parsedate_tz
 from collections import defaultdict
 import sys
@@ -169,6 +168,9 @@ def go(project_id, rawdir, insertdir, logdir):
                             # print line_number
 
                             tweet = simplejson.loads(line)
+
+                            # use tweet id as mongo id
+                            #tweet['_id'] = tweet['id']
 
                             # now, when we did the process tweet step we already worked with
                             # these dates. If they failed before, they shouldn't file now, but
