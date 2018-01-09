@@ -1,5 +1,7 @@
 import os
 
+# Sam's test note
+
 # MONGODB CONFIG
 USERNAME = 'USERNAME'
 PASSWORD = 'PASSWORD'
